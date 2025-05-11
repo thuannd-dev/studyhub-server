@@ -22,7 +22,6 @@ export class UserEntity {
   username: string;
 
   @Column()
-  @IsEmail()
   email: string;
 
   @Column({
