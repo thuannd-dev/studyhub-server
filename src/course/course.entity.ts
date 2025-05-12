@@ -23,16 +23,13 @@ export class CourseEntity {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created: Date;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ type: 'timestamp', nullable: true })
   updated: Date;
 
   @BeforeUpdate()
   updateTimestamp() {
     this.updated = new Date();
   }
-
-  @ManyToOne(() => UserEntity, (user) => user.courses)
-  user: UserEntity;
 
   @OneToMany(() => EnrollmentEntity, (e) => e.course)
   enrollments: EnrollmentEntity[];

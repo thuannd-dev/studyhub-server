@@ -46,8 +46,8 @@ export class UserEntity {
   })
   role: UserRole;
 
-  @OneToMany(() => CourseEntity, (course) => course.user)
-  courses: CourseEntity[];
+  // @OneToMany(() => CourseEntity, (course) => course.user)
+  // courses: CourseEntity[];
 
   @OneToMany(() => CourseEntity, (course) => course.enrollments)
   enrollments: CourseEntity[];

@@ -6,7 +6,7 @@ import { CreateEnrollmentDto } from './dto/create-enrollment.dto';
 export class EnrollmentController {
   constructor(private readonly enrollmentService: EnrollmentService) {}
 
-  @Post()
+  @Post('create')
   async enrollStudent(@Body() enrollData: CreateEnrollmentDto) {
     return await this.enrollmentService.enrollStudent(enrollData);
   }

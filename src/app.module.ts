@@ -5,6 +5,7 @@ import * as dotenv from 'dotenv';
 import { UserModule } from './user/user.module';
 import { APP_PIPE } from '@nestjs/core';
 import { EnrollmentModule } from './enrollment/enrollment.module';
+import { CourseModule } from './course/course.module';
 dotenv.config();
 @Module({
   imports: [
@@ -19,6 +20,7 @@ dotenv.config();
       synchronize: true,
     }),
     UserModule,
+    CourseModule,
     EnrollmentModule,
   ],
   controllers: [AppController],
