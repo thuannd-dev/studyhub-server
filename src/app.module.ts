@@ -3,9 +3,11 @@ import { AppController } from './app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
 import { UserModule } from './user/user.module';
-import { APP_PIPE } from '@nestjs/core';
+import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 import { EnrollmentModule } from './enrollment/enrollment.module';
 import { CourseModule } from './course/course.module';
+import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
+import { AllExceptionsFilter } from './common/filters/exception.filter';
 dotenv.config();
 @Module({
   imports: [
@@ -27,7 +29,16 @@ dotenv.config();
   providers: [
     {
       provide: APP_PIPE,
-      useClass: ValidationPipe,
+      useValue: new ValidationPipe({
+        transform: true, //chuyển đổi dữ liệu đầu vào thành kiểu dữ liệu trong DTO
+        whitelist: true, //xóa các thuộc tính không có trong DTO
+        forbidNonWhitelisted: true, // trả về lỗi nếu có thuộc tính không có trong DTO
+        always: true, //
+      }),
+    },
+    {
+      provide: APP_FILTER,
+      useClass: AllExceptionsFilter,
     },
   ],
 })

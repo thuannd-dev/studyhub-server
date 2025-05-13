@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { EnrollmentRO } from './enrollment.interface';
 import { CreateEnrollmentDto } from './dto/create-enrollment.dto';
 import { EnrollmentEntity } from './enrollment.entity';
@@ -24,14 +24,14 @@ export class EnrollmentService {
       where: { id: dto.courseId },
     });
     if (!course) {
-      throw new Error('Course not found');
+      throw new BadRequestException('Course not found');
     }
     // Check if the student exists
     const student = await this.userRepository.findOne({
       where: { id: dto.studentId },
     });
     if (!student) {
-      throw new Error('Student not found');
+      throw new BadRequestException('Student not found');
     }
     let newEnrollment: EnrollmentEntity = new EnrollmentEntity();
     newEnrollment.courseId = dto.courseId;

@@ -7,7 +7,7 @@ import { CourseRO } from './course.interface';
 export class CourseController {
   constructor(private readonly courseService: CourseService) {}
 
-  @Post('create')
+  @Post('sign-up')
   async createCourse(@Body() dto: CreateCourseDto): Promise<CourseRO> {
     return await this.courseService.createCourse(dto);
   }

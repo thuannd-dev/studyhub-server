@@ -9,3 +9,4 @@ async function bootstrap() {
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
+//không nên cài validation pipe ở đây vì nó sẽ không hoạt động với group validation
